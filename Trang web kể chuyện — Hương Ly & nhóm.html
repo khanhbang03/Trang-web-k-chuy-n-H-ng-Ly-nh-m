@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hành Trình Khám Phá — Hương Ly & nhóm</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#ff7a59;--muted:#9aa4b2;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#e6eef6;background:linear-gradient(180deg,#071228 0%, #071a2e 60%, #071a2e 100%);min-height:100vh}
+    header{padding:28px 24px;display:flex;align-items:center;gap:16px}
+    .logo{width:64px;height:64px;background:linear-gradient(135deg,var(--accent),#ffd36b);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#081426}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted)}
+    main{display:grid;grid-template-columns:360px 1fr;gap:20px;padding:18px}
+
+    /* LEFT SIDEBAR */
+    .sidebar{background:var(--card);padding:16px;border-radius:14px;backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .section-title{font-size:13px;color:var(--muted);margin:0 0 8px}
+    .character{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);margin-bottom:10px}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#13233a,#0b1b2e);display:flex;align-items:center;justify-content:center;font-weight:700;color:#bfe3ff}
+    .char-info{flex:1}
+    .char-name{font-weight:700;margin:0}
+    .char-desc{margin:2px 0 0;color:var(--muted);font-size:13px}
+    .controls{display:flex;gap:8px;margin-top:12px}
+    button.btn{border:0;padding:8px 10px;border-radius:8px;background:var(--glass);color:#dbeafe;font-weight:600;cursor:pointer}
+    button.btn.primary{background:linear-gradient(90deg,var(--accent),#ffd36b);color:#081426}
+
+    /* MAIN */
+    .stage{padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 8px 26px rgba(0,0,0,0.6);min-height:520px}
+    .scene{display:flex;gap:18px}
+    .canvas{flex:1;min-height:420px;border-radius:12px;padding:16px;background:radial-gradient(ellipse at 20% 0%, rgba(255,255,255,0.02), transparent);position:relative;overflow:hidden}
+    .panel{width:320px}
+    .card{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;margin-bottom:12px}
+    .storyline{font-size:15px;line-height:1.45;color:#e8f7ff;white-space:pre-wrap}
+
+    /* little interactions */
+    .food-list{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:600;font-size:13px}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.85));}
+    .modal.show{display:flex}
+    .modal-card{width:720px;max-width:92%;background:#061226;border-radius:12px;padding:18px}
+    .close{float:right;background:transparent;border:0;color:var(--muted);font-weight:700}
+
+    /* subtle animations */
+    .floating-cloud{position:absolute;right:8%;top:8%;opacity:0.06;font-size:130px;transform:rotate(-10deg)}
+    .warm-button{display:inline-block;padding:12px 14px;border-radius:12px;background:linear-gradient(180deg,#081a2e,#0d2338);border:1px solid rgba(255,255,255,0.03)}
+
+    footer{padding:12px 20px;color:var(--muted);font-size:13px}
+    #miniGame {color:white}
+    @media (max-width:980px){main{grid-template-columns:1fr;padding:12px}.panel{width:100%}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">HL</div>
+    <div>
+      <h1>Hành Trình Khám Phá — Hương Ly & nhóm</h1>
+      <p class="lead">Một trang web kể chuyện tương tác nhỏ mô tả các hoạt động: luyện công, đọc sách, ăn uống, khám phá và chơi cùng bạn bè.</p>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <p class="section-title">Nhân vật chính</p>
+      <div class="character" data-name="Huong Ly">
+        <div class="avatar">HL</div>
+        <div class="char-info">
+          <p class="char-name">Hương Ly (bận giả trân)</p>
+          <p class="char-desc">Đang luyện công 1000 năm, kết bạn với Trần Đuc Mạnh & nhóm.</p>
+        </div>
+      </div>
+
+      <div class="character" data-name="Tran Duc Manh">
+        <div class="avatar">TM</div>
+        <div class="char-info">
+          <p class="char-name">Trần Đuc Mạnh</p>
+          <p class="char-desc">Tham gia luyện công, ngắm gái trên IG, kể chuyện ma.</p>
+        </div>
+      </div>
+
+      <div class="character" data-name="Hoang Thai Son">
+        <div class="avatar">HS</div>
+        <div class="char-info">
+          <p class="char-name">Hoàng Thái Sơn</p>
+          <p class="char-desc">Đang dùng ChatGPT giao tiếp với Nguyễn Khánh Bằng.</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="autoPlay">▶ Tự chạy</button>
+        <button class="btn" id="pause">⏸ Dừng</button>
+        <button class="btn primary" id="explore">Khám Phá</button>
+      </div>
+
+      <div style="margin-top:14px">
+        <p class="section-title">Món ăn & sở thích</p>
+        <div class="chip">PussA cat (mèo)</div>
+        <div class="chip">Kimbap</div>
+        <div class="chip">Bánh mì áp chảo</div>
+        <div class="chip">Trà</div>
+        <div class="chip">Đọc 10 tiểu thuyết</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <p class="section-title">Tương tác nhanh</p>
+        <button class="btn" id="warmUp">Ấm người (đêm lạnh)</button>
+        <button class="btn" id="readBooks">Đọc sách (10 cuốn)</button>
+      </div>
+    </aside>
+
+    <section class="stage">
+      <div class="scene">
+        <div class="canvas" id="canvas">
+          <div class="floating-cloud">☁️</div>
+          <div class="card" id="sceneCard">
+            <div class="storyline" id="story">Chào mừng đến với "Hành Trình Khám Phá" — nhấn "Tự chạy" để bắt đầu câu chuyện.
+
+Nhân vật: Hương Ly, Trần Đuc Mạnh, Huân Hoa Hồng, Kha Bảnh, Nam Per, Nguyên Phương Anh, Tạ Tùng Dương, Nghiêm Minh Hiếu, Phạm Hoàng Hải, Phạm Đức Minh.
+
+Nội dung sẽ mô tả: luyện công 1000 năm, ăn uống tươi ngon, uống trà, đọc 10 tiểu thuyết, gặp mèo PussA, khám phá thiên nhiên, khám phá bà Trần Thị Phúc, chơi game, và những tình huống hài hước khác.
+</div>
+          </div>
+
+          <div style="position:absolute;left:20px;bottom:24px;">
+            <button class="warm-button" id="miniGame">Rung người (nhấn để ấm)</button>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="card">
+            <h3 style="margin:0 0 8px">Tường thuật nhanh</h3>
+            <p class="char-desc">Sử dụng trình điều khiển bên trái để kích hoạt các phân cảnh: luyện công, ăn uống, đọc sách, khám phá nhà ma, và chat với ChatGPT.</p>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0 0 8px">Chat mô phỏng</h4>
+            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Hoàng Thái Sơn ↔ Nguyễn Khánh Bằng (mô phỏng)</div>
+            <div style="display:flex;gap:8px">
+              <input id="chatInput" placeholder="Gõ tin nhắn..." style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:#e6eef6" />
+              <button class="btn" id="sendChat">Gửi</button>
+            </div>
+            <div id="chatLog" style="margin-top:8px;max-height:120px;overflow:auto;font-size:13px;color:#d7eafc"></div>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0 0 8px">Thực đơn khám phá</h4>
+            <div class="food-list">
+              <div class="chip">PussA Cat (mèo)</div>
+              <div class="chip">Súc xích Ponnie</div>
+              <div class="chip">Kimbap</div>
+              <div class="chip">Bánh mì áp chảo</div>
+              <div class="chip">Trà ấm</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>Trang web demo kể chuyện — bạn có thể tùy chỉnh nội dung và thêm ảnh/âm thanh theo ý thích.</footer>
+
+  <div class="modal" id="exploreModal" role="dialog" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close" id="closeModal">✕</button>
+      <h3>Khám Phá: Nhà ma & hành trình</h3>
+      <p style="color:var(--muted)">Bà Trần Thị Phúc là một nhân vật địa phương trong câu chuyện. Ở đây bạn có thể mô phỏng cuộc khám phá nhà ma: gặp Trần Hoàng Nam, bị phụ huynh nhắc nhỏ, quay về lán trọ và chơi bài với Tạ Tùng Dương.</p>
+      <ol style="color:#dff3ff">
+        <li>Luyện công 1000 năm — Hương Ly tập trung chuyển hoá năng lượng (ẩn dụ).</li>
+        <li>Ăn uống: thịt tươi & trà — mọi người sưởi ấm qua đêm lạnh.</li>
+        <li>Đọc 10 tiểu thuyết — mỗi cuốn mở ra một mini-truyện.</li>
+        <li>Gặp mèo PussA — mèo dẫn lối trong rừng.</li>
+        <li>Chơi game & chat với ChatGPT — Hoàng Thái Sơn trao đổi với Nguyễn Khánh Bằng.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    // Simple scene player
+    const storyText = document.getElementById('story');
+    const autoPlay = document.getElementById('autoPlay');
+    const pause = document.getElementById('pause');
+    const explore = document.getElementById('explore');
+    const exploreModal = document.getElementById('exploreModal');
+    const closeModal = document.getElementById('closeModal');
+    const warmUp = document.getElementById('warmUp');
+    const readBooks = document.getElementById('readBooks');
+    const miniGame = document.getElementById('miniGame');
+    const chatInput = document.getElementById('chatInput');
+    const sendChat = document.getElementById('sendChat');
+    const chatLog = document.getElementById('chatLog');
+
+    const scenes = [
+      `1) Luyện công 1000 năm\nHương Ly bắt đầu hành trình: tĩnh tâm, luyện khí, tưởng tượng khiên cá chép hóa rồng.`,
+      `2) Gặp mặt bạn bè\nTrần Đuc Mạnh, Huân Hoa Hồng, Kha Bảnh, Nam Per, Nguyên Phương Anh tụ họp để cổ vũ.`,
+      `3) Bữa ăn & trà\nĂn thịt tươi, kimbap, bánh mì áp chảo và uống trà ấm. Mọi người kể chuyện ma.`,
+      `4) Đọc sách\nCả nhóm cùng đọc 10 cuốn tiểu thuyết — mỗi cuốn như một cửa sổ mở ra cuộc phiêu lưu.`,
+      `5) Khám phá thiên nhiên\nMèo PussA dẫn họ vào rừng, tìm hang động nhỏ, khám phá nhà bà Trần Thị Phúc.`,
+      `6) Trò chơi & chat\nHoàng Thái Sơn dùng ChatGPT trò chuyện với Nguyễn Khánh Bằng; mọi người chơi bài và hát guitar.`,
+      `7) Kết thúc tạm thời\nĐêm lạnh, mọi người rùng mình để ấm — may không có ong bay vo ve. Hẹn gặp lại trong chương mới!`
+    ];
+
+    let idx = 0; let timer = null;
+    function showScene(i){ storyText.textContent = scenes[i]; }
+    function startAuto(){ if(timer) return; timer = setInterval(()=>{ idx = (idx+1)%scenes.length; showScene(idx); }, 4500); }
+    function stopAuto(){ clearInterval(timer); timer = null; }
+
+    autoPlay.addEventListener('click', ()=>{ startAuto(); });
+    pause.addEventListener('click', ()=>{ stopAuto(); });
+    explore.addEventListener('click', ()=>{ exploreModal.classList.add('show'); exploreModal.setAttribute('aria-hidden','false'); });
+    closeModal.addEventListener('click', ()=>{ exploreModal.classList.remove('show'); exploreModal.setAttribute('aria-hidden','true'); });
+
+    warmUp.addEventListener('click', ()=>{
+      const el = document.getElementById('canvas');
+      el.animate([{transform:'scale(1)'},{transform:'scale(1.01)'},{transform:'scale(1)'}],{duration:700,iterations:1});
+      alert('Mọi người quấn chăn, uống trà ấm — ấm áp hơn rồi!');
+    });
+
+    readBooks.addEventListener('click', ()=>{
+      let list = '';
+      for(let i=1;i<=10;i++) list += `${i}. Tiểu thuyết kỳ ${i}\n`;
+      alert('Danh sách 10 cuốn tiểu thuyết:\n\n'+list);
+    });
+
+    miniGame.addEventListener('click', ()=>{
+      const r = Math.random();
+      const msg = r>0.6? 'Bạn đã ấm lên! Hơi thở ấm áp lan tỏa.' : 'Cơn gió lạnh còn đó, cùng ôm nhau ấm hơn nhé.';
+      alert(msg);
+    });
+
+    sendChat.addEventListener('click', ()=>{
+      const text = chatInput.value.trim(); if(!text) return;
+      const time = new Date().toLocaleTimeString();
+      const userLine = `<div><strong>Nguyễn Khánh Bằng</strong> <span style="color:var(--muted);font-size:12px">${time}</span><div style="margin-top:4px">${escapeHtml(text)}</div></div>`;
+      chatLog.innerHTML += userLine;
+      chatLog.scrollTop = chatLog.scrollHeight;
+      chatInput.value = '';
+      // simple simulated reply from Hoàng Thái Sơn using setTimeout
+      setTimeout(()=>{
+        const reply = `<div style="margin-top:8px"><strong>Hoàng Thái Sơn</strong> <span style="color:var(--muted);font-size:12px">${new Date().toLocaleTimeString()}</span><div style="margin-top:4px">Tôi đang kiểm tra guitar của chị Hạnh — chị ấy đang khám phá nhà ma. Hẹn sau nhé!</div></div>`;
+        chatLog.innerHTML += reply; chatLog.scrollTop = chatLog.scrollHeight;
+      },900);
+    });
+
+    function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+    // initialize
+    showScene(0);
+  </script>
+</body>
+</html>

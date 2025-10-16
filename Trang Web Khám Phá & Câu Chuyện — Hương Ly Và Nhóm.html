@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Khám Phá & Câu Chuyện — Hương Ly và Nhóm</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#ffb86b;--muted:#98a0b3;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    body{margin:0;background:linear-gradient(180deg,#071029 0%, #0f1724 100%);color:#e6eef8}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#ffb86b,#ff7ab6);display:flex;align-items:center;justify-content:center;font-weight:700;color:#082033}
+    nav a{color:var(--muted);margin-left:18px;text-decoration:none}
+    .container{max-width:1100px;margin:28px auto;padding:18px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+    h1{margin:0;font-size:22px}
+    p.lead{color:var(--muted);margin-top:8px}
+
+    /* character list */
+    .chars{display:flex;flex-direction:column;gap:12px}
+    .char{display:flex;gap:12px;align-items:center}
+    .avatar{width:64px;height:64px;border-radius:10px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--accent)}
+    .meta small{display:block;color:var(--muted)}
+
+    /* story timeline */
+    .timeline{margin-top:12px;border-left:2px dashed rgba(255,255,255,0.03);padding-left:12px}
+    .event{margin-bottom:14px}
+    .event h4{margin:0 0 4px 0}
+    .event p{margin:0;color:var(--muted)}
+
+    /* map & gallery */
+    .map-placeholder{height:220px;border-radius:10px;background:linear-gradient(180deg,#071a2b,#052033);display:flex;align-items:center;justify-content:center;color:var(--muted);border:1px dashed rgba(255,255,255,0.03)}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+    .photo{height:80px;border-radius:8px;background:linear-gradient(135deg,#092b3a,#0d1f2a);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+
+    /* interactive chat */
+    .chat{display:flex;flex-direction:column;height:420px}
+    .chat-window{flex:1;overflow:auto;padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
+    .msg{margin:8px 0;max-width:78%}
+    .msg.me{align-self:flex-end;background:linear-gradient(180deg,#062f45,#0b4b66);padding:10px;border-radius:10px}
+    .msg.them{align-self:flex-start;background:rgba(255,255,255,0.03);padding:10px;border-radius:10px}
+    .controls{display:flex;gap:8px;margin-top:10px}
+    .btn{padding:10px 12px;border-radius:8px;border:none;cursor:pointer;background:var(--accent);color:#082033;font-weight:600}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.container{padding:10px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">KL</div>
+      <div>
+        <div style="font-weight:700">Khám Phá & Câu Chuyện</div>
+        <div style="font-size:12px;color:var(--muted)">Hương Ly, Ponnie, Kimbap, Bánh Mì & nhóm bạn</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#story">Câu chuyện</a>
+      <a href="#map">Khám phá</a>
+      <a href="#gallery">Ảnh</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card">
+        <h1 id="story">Câu chuyện của một chuyến đi</h1>
+        <p class="lead">Một trang web nhỏ kể về Hương Ly đang bận "ăn nên nướng" — khám phá ẩm thực: Ponnie, Kimbap, Bánh mì áp chảo — và hành trình khám phá thiên nhiên cùng nhóm bạn. Thêm những đoạn hội thoại nhỏ, bản đồ và ảnh kỷ niệm.</p>
+
+        <div style="display:flex;gap:12px;margin-top:14px;align-items:flex-start">
+          <div style="flex:1">
+            <div class="chars card" style="padding:12px;">
+              <div class="char"><div class="avatar">HL</div><div class="meta"><strong>Hương Ly</strong><small>Đang bận ăn & khám phá</small></div></div>
+              <div class="char"><div class="avatar">PN</div><div class="meta"><strong>Ponnie (Úc)</strong><small>Yêu đồ ăn</small></div></div>
+              <div class="char"><div class="avatar">KB</div><div class="meta"><strong>Kimbap</strong><small>Ngon miệng</small></div></div>
+              <div class="char"><div class="avatar">BM</div><div class="meta"><strong>Bánh mì áp chảo</strong><small>Chén sạch</small></div></div>
+              <div class="char"><div class="avatar">HTS</div><div class="meta"><strong>Hoàng Thái Sơn</strong><small>Giao tiếp với Nguyễn Khánh Bằng</small></div></div>
+              <div class="char"><div class="avatar">NB</div><div class="meta"><strong>Nguyễn Khánh Bằng</strong><small>Nhân vật chính (bạn)</small></div></div>
+            </div>
+          </div>
+          <div style="width:260px">
+            <div class="card" style="padding:12px;">
+              <h3>Tình huống hiện tại</h3>
+              <div class="timeline">
+                <div class="event"><h4>Hỏi thăm</h4><p>Hoàng Thái Sơn hỏi: "Chị Hạnh chơi guitar đâu rồi?" — Ai biết không?</p></div>
+                <div class="event"><h4>Phát hiện</h4><p>Hoá ra chị Hạnh đang đi khám phá nhà ma cùng Trần Hoàng Nam.</p></div>
+                <div class="event"><h4>Nhắc nhở</h4><p>Phụ huynh nhắc nhỏ: về lán trọ để chơi bài cùng Tạ Tùng Dương, Nghiêm Minh Hiếu và Phạm Hoàng Hải.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <h3>Hội thoại tương tác</h3>
+          <div class="chat card" id="chatArea" style="padding:12px">
+            <div class="chat-window" id="chatWindow">
+              <!-- messages injected by JS -->
+            </div>
+            <div class="controls">
+              <button class="btn" id="btnStart">Bắt đầu hội thoại</button>
+              <button class="btn secondary" id="btnReset">Làm mới</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3>Khám phá & Bản đồ</h3>
+          <p class="lead">Các điểm đến: rừng, nhà ma, lán trại, quán ăn Ponnie.</p>
+          <div id="map" class="map-placeholder" aria-hidden="false">Bản đồ (placeholder) — tích hợp API bản đồ nếu cần</div>
+
+          <h4 style="margin-top:12px">Album nhanh</h4>
+          <div id="gallery" class="gallery">
+            <div class="photo">Hương Ly & Ponnie</div>
+            <div class="photo">Nhà ma: Trần Hoàng Nam</div>
+            <div class="photo">Lán trọ & bài hát</div>
+            <div class="photo">Bánh mì áp chảo</div>
+            <div class="photo">Kimbap ngon</div>
+            <div class="photo">Phạm Hoàng Hải - IG</div>
+          </div>
+
+          <h4 style="margin-top:12px">Nhiệm vụ nhanh</h4>
+          <ul style="color:var(--muted);padding-left:18px;margin:8px 0">
+            <li>Gọi chị Hạnh: kiểm tra guitar</li>
+            <li>Tụ tập: về lán trọ, chơi bài</li>
+            <li>Ăn tối: Ponnie - quán Úc</li>
+            <li>Khám phá: nhà ma cùng Trần Hoàng Nam</li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <h2 id="gallery">Mô-đun tương tác: Kịch bản & nhánh</h2>
+      <p class="lead">Chọn nhánh để xem kết quả: ai đi đâu, ai ở lại, và ai chơi guitar.</p>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn" onclick="choose('guitar')">Tìm guitar</button>
+        <button class="btn secondary" onclick="choose('nhama')">Đi nhà ma</button>
+        <button class="btn secondary" onclick="choose('lanTro')">Về lán trọ</button>
+      </div>
+      <div id="branchResult" style="margin-top:14px;color:var(--muted)"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    Trang web giả lập nhỏ — tạo cho vui và dễ chỉnh sửa. Bạn có thể tải file HTML hoặc chỉnh nội dung trực tiếp.
+  </footer>
+
+  <script>
+    const chatWindow = document.getElementById('chatWindow');
+    const btnStart = document.getElementById('btnStart');
+    const btnReset = document.getElementById('btnReset');
+    const branchResult = document.getElementById('branchResult');
+
+    const script = [
+      {who:'them',text:'Hoàng Thái Sơn: "Chị Hạnh chơi guitar đâu rồi?"'},
+      {who:'me',text:'Nguyễn Khánh Bằng: "Mình không chắc — gọi thử xem."'},
+      {who:'them',text:'Tin nhắn: Chị Hạnh đang khám phá nhà ma cùng Trần Hoàng Nam.'},
+      {who:'them',text:'Phụ huynh: "Các con về lán trọ để chơi bài, nhớ an toàn nhé."'},
+      {who:'me',text:'Tạ Tùng Dương: "Ai mang bài rồi? Mình mang đàn thùng nhẹ."'},
+      {who:'them',text:'Nghiêm Minh Hiếu & Phạm Hoàng Hải: "Được — tối nay chill."'}
+    ];
+
+    function appendMsg(item){
+      const div = document.createElement('div');
+      div.className = 'msg ' + (item.who === 'me' ? 'me' : 'them');
+      div.textContent = item.text;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    btnStart.addEventListener('click', ()=>{
+      chatWindow.innerHTML = '';
+      let i=0;
+      const t = setInterval(()=>{
+        appendMsg(script[i]);
+        i++;
+        if(i>=script.length) clearInterval(t);
+      },600);
+    });
+
+    btnReset.addEventListener('click', ()=>{chatWindow.innerHTML = '';});
+
+    function choose(option){
+      if(option==='guitar'){
+        branchResult.innerHTML = '<strong>Kết quả:</strong> Chị Hạnh trả lời: "Tớ để guitar ở lán trọ — mang theo nhé." Mọi người quay về và tổ chức buổi nhạc nhỏ.';
+      } else if(option==='nhama'){
+        branchResult.innerHTML = '<strong>Kết quả:</strong> Chị Hạnh và Trần Hoàng Nam tin rằng nhà ma chỉ là huyền thoại — buổi khám phá kết thúc an toàn, mọi người cười lớn.';
+      } else if(option==='lanTro'){
+        branchResult.innerHTML = '<strong>Kết quả:</strong> Mọi người về lán trọ, Tạ Tùng Dương mở bài hát, Phạm Hoàng Hải khoe vài khoảnh khắc IG.';
+      }
+    }
+
+    // small easter egg: double-click logo to shuffle gallery captions
+    document.querySelector('.logo').addEventListener('dblclick', ()=>{
+      const photos = Array.from(document.querySelectorAll('.photo'));
+      photos.forEach(p=>{p.textContent = ['Ponnie & Hương Ly','Rừng mùa thu','Lán trọ','Bánh mì áp chảo','Kimbap ngon','IG highlight'][Math.floor(Math.random()*6)];});
+    });
+  </script>
+</body>
+</html>
